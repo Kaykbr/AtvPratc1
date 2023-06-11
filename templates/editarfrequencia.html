@@ -1,0 +1,22 @@
+{% include 'menu.html' %}
+
+<h1>Editar Frequência</h1>
+<hr>
+<form action="{{ url_for('editar', frequencia_id=frequencia.id) }}" method="POST">
+    <label for="disciplina">Disciplina:</label>
+    <input type="text" id="disciplina" name="disciplina" value="{{ frequencia.disciplina }}"><br>
+
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" value="{{ frequencia.nome }}"><br>
+
+    <label for="data">Data:</label>
+    <input type="date" id="data" name="data" value="{{ frequencia.data.strftime('%Y-%m-%d') }}"><br>
+
+    <label for="frequencia">Frequência:</label>
+    <input type="checkbox" id="frequencia" name="frequencia" {% if frequencia.frequencia %}checked{% endif %}><br>
+
+    <input type="submit" value="Salvar">
+</form>
+<a href="{{ url_for('listar') }}" class="btn-list">Voltar para a lista</a>
+
+{% include 'rodape.html' %}

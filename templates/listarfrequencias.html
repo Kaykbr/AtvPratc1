@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Listar Frequências</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #333;
+        }
+        
+        hr {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            font-weight: bold;
+        }
+        
+        a {
+            color: #333;
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+        
+        .link {
+            padding: 8px 16px;
+            background-color: #eee;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333;
+            margin-top: 10px;
+        }
+        
+        .link:hover {
+            background-color: #ddd;
+        }
+        
+        .btn-editar {
+            background-color: #2ecc71;
+            color: #fff;
+        }
+        
+        .btn-excluir {
+            background-color: #e74c3c;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    {% include 'menu.html' %}
+
+    <h1>Listar Frequências</h1>
+    <hr>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Disciplina</th>
+            <th>Nome</th>
+            <th>Data</th>
+            <th>Frequência</th>
+            <th>Ações</th>
+        </tr>
+        {% for frequencia in frequencias %}
+        <tr>
+            <td>{{ frequencia.id }}</td>
+            <td>{{ frequencia.disciplina }}</td>
+            <td>{{ frequencia.nome }}</td>
+            <td>{{ frequencia.data.strftime('%Y-%m-%d') }}</td>
+            <td>{{ frequencia.frequencia }}</td>
+            <td>
+                <a class="link btn-editar" href="{{ url_for('editar', frequencia_id=frequencia.id) }}">Editar</a>
+                <a class="link btn-excluir" href="{{ url_for('excluir', frequencia_id=frequencia.id) }}">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a class="link" href="{{ url_for('index') }}">Voltar</a>
+
+    {% include 'rodape.html' %}
+</body>
+</html>
